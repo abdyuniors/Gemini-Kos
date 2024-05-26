@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\RoomOccupant;
+use App\Http\Resources\RoomOccupantResource;
 use App\Http\Requests\StoreRoomOccupantRequest;
 use App\Http\Requests\UpdateRoomOccupantRequest;
 
@@ -13,7 +15,10 @@ class RoomOccupantController extends Controller
      */
     public function index()
     {
-        //
+        $roomOccupants = RoomOccupant::all();
+        return Inertia::render('RoomOccupant/Index', [
+            'roomOccupants' => RoomOccupantResource::collection($roomOccupants),
+        ]);
     }
 
     /**

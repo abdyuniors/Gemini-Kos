@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use App\Http\Resources\RoomResource;
+use Inertia\Inertia;
 
 class RoomController extends Controller
 {
@@ -13,7 +15,10 @@ class RoomController extends Controller
      */
     public function index()
     {
-        //
+        $rooms = Room::all();
+        return Inertia::render('Room/Index', [
+            'rooms' => RoomResource::collection($rooms),
+        ]);
     }
 
     /**

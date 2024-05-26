@@ -14,19 +14,18 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ROOM_STATUS_TEXT_MAP, ROOM_STATUS_CLASS_MAP } from "@/constant";
 
-export default function Index({ auth, rooms }) {
+export default function Index({ auth, occupants }) {
   return (
     <AuthenticatedLayout
       user={auth.user}
       header={
         <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          Rooms
+          Occupants
         </h2>
       }
     >
-      <Head title="Rooms" />
+      <Head title="Occupants" />
 
       <Card className="px-6">
         <CardContent>
@@ -35,35 +34,26 @@ export default function Index({ auth, rooms }) {
               <TableHead>
                 <TableRow>
                   <TableCell>ID</TableCell>
-                  <TableCell>Facilities</TableCell>
-                  <TableCell>Price</TableCell>
-                  <TableCell>Status</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>Phone</TableCell>
                   <TableCell>Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rooms.data.map((room) => (
-                  <TableRow key={room.id}>
-                    <TableCell>{room.id}</TableCell>
-                    <TableCell>{room.facilities}</TableCell>
-                    <TableCell>{room.price}</TableCell>
+                {occupants.data.map((occupant) => (
+                  <TableRow key={occupant.id}>
+                    <TableCell>{occupant.id}</TableCell>
+                    <TableCell>{occupant.name}</TableCell>
+                    <TableCell>{occupant.email}</TableCell>
+                    <TableCell>{occupant.phone}</TableCell>
                     <TableCell>
-                      <span
-                        className={
-                          "px-2 py-1 rounded " +
-                          ROOM_STATUS_CLASS_MAP[room.status]
-                        }
-                      >
-                        {ROOM_STATUS_TEXT_MAP[room.status]}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <Link href={route("room.edit", room.id)}>
+                      <Link href={route("occupant.edit", occupant.id)}>
                         <IconButton>
                           <EditIcon />
                         </IconButton>
                       </Link>
-                      <Link href={route("room.destroy", room.id)}>
+                      <Link href={route("occupant.destroy", occupant.id)}>
                         <IconButton>
                           <DeleteIcon />
                         </IconButton>

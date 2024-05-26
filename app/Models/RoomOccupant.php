@@ -12,6 +12,7 @@ class RoomOccupant extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     protected $fillable = [
+        'id',
         'room_id',
         'occupant_id',
         'entry_date',
