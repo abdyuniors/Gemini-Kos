@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class RoomOccupant extends Model
 {
@@ -22,6 +23,17 @@ class RoomOccupant extends Model
         'entry_date' => 'date',
         'exit_date' => 'date'
     ];
+     // Accessor untuk Entry Date
+     protected function getEntryDateAttribute($value)
+     {
+         return Carbon::parse($value)->format('j F Y');
+     }
+
+     // Accessor untuk Exit Date
+     protected function getExitDateAttribute($value)
+     {
+         return Carbon::parse($value)->format('j F Y');
+     }
     public function room()
     {
         return $this->belongsTo(Room::class);
